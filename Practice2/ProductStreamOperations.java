@@ -36,8 +36,6 @@ public class ProductStreamOperations {
                 System.out.println("Invalid input, enter an integer.");
             }
         }
-
-        // Input product details
         for (int i = 0; i < n; i++) {
             System.out.println("\nProduct " + (i + 1) + ":");
             System.out.print("Name: ");
@@ -62,7 +60,6 @@ public class ProductStreamOperations {
             products.add(new Product(name, price, category));
         }
 
-        // 1. Group products by category
         Map<String, List<Product>> grouped = products.stream()
                 .collect(Collectors.groupingBy(p -> p.category));
 
@@ -72,7 +69,6 @@ public class ProductStreamOperations {
             list.forEach(System.out::println);
         });
 
-        // 2. Most expensive product in each category
         Map<String, Optional<Product>> mostExpensive = products.stream()
                 .collect(Collectors.groupingBy(
                         p -> p.category,
@@ -84,7 +80,6 @@ public class ProductStreamOperations {
             prodOpt.ifPresent(prod -> System.out.println("Category: " + cat + " -> " + prod));
         });
 
-        // 3. Average price of all products
         double avgPrice = products.stream()
                 .collect(Collectors.averagingDouble(p -> p.price));
         System.out.println("\nAverage price of all products: " + avgPrice);
